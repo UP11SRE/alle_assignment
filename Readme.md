@@ -28,7 +28,6 @@ This is a simple task management microservice built in Go using the Gin framewor
 
 ```
 git clone https://github.com/UP11SRE/alle_assignment.git
-cd app
 ```
 
 - Run The Service
