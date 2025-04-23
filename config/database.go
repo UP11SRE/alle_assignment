@@ -4,15 +4,27 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"os"
+
+	"github.com/joho/godotenv"
 
 	_ "github.com/lib/pq"
 )
 
 var DB *sql.DB
 
-func ConnectDB() {
-	connStr := "postgresql://pgsql_yjyr_user:1DuPO6cwhs0oXIBWoHs79kYpVk76ZTHN@dpg-d03n52buibrs73aekdhg-a.singapore-postgres.render.com/pgsql_yjyr"
 
+func ConnectDB() {
+   
+	loadErr := godotenv.Load() 
+	if loadErr != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	connStr := os.Getenv("DB_URL")
+	if connStr == "" {
+		log.Fatal("DB_URL environment variable is not set")
+	}
 	var err error
 	DB, err = sql.Open("postgres", connStr)
 	if err != nil {
